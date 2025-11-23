@@ -2,7 +2,7 @@ pipeline {
   agent any
   environment {
     APP_NAME = 'springboot-login-app'
-    IMAGE_NAME = 'your-dockerhub-username/springboot-login-app'
+    IMAGE_NAME = 'https://github.com/12ashok/login_app'
     VERSION = '0.0.1'
   }
   stages {
@@ -14,6 +14,7 @@ pipeline {
     stage('Build & Test') {
       steps {
         sh './mvnw test'
+        sh './mvnw -q -DskipTests package'
       }
       post {
         always {
@@ -43,15 +44,12 @@ pipeline {
       }
     }
   }
- post {
-    always {
-      // Publish unit test reports (Surefire)
-      junit '**/target/surefire-reports/*.xml'
-
-      // Publish integration test reports (Failsafe), if you use them
-      junit '**/target/failsafe-reports/*.xml'
+  post {
+    success {
+      echo 'Build successful.'
+    }
+    failure {
+      echo 'Build failed.'
     }
   }
-  }
 }
-
