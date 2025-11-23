@@ -13,8 +13,7 @@ pipeline {
     }
     stage('Build & Test') {
       steps {
-        sh './mvnw -q -DskipTests=false test'
-        sh './mvnw -q -DskipTests package'
+        sh './mvnw test'
       }
       post {
         always {
