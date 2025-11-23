@@ -49,8 +49,7 @@ pipeline {
     junit '**/target/failsafe-reports/*.xml'
   }
 }
-
-  post {
+ post {
     success {
       echo 'Build successful.'
     }
