@@ -11,7 +11,7 @@ pipeline {
         checkout scm
       }
     }
-    stage('Build & Test') {
+   // stage('Build & Test') {
       steps {
         sh './mvnw test'
         sh './mvnw -q -DskipTests package'
@@ -22,12 +22,12 @@ pipeline {
         }
       }
     }
-    stage('Build Image') {
+   // stage('Build Image') {
       steps {
         sh "docker build -t ${IMAGE_NAME}:${VERSION} ."
       }
     }
-    stage('Push Image') {
+    //stage('Push Image') {
       when {
         expression { return env.DOCKER_USER && env.DOCKER_PASS }
       }
@@ -38,12 +38,12 @@ pipeline {
         }
       }
     }
-    stage('Deploy (Compose)') {
+  //  stage('Deploy (Compose)') {
       steps {
         sh 'docker compose up -d --build'
       }
     }
-  }
+  } 
   post {
     success {
       echo 'Build successful.'
