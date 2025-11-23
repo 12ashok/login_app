@@ -52,13 +52,6 @@ pipeline {
       junit '**/target/failsafe-reports/*.xml'
     }
   }
- post {
-    success {
-      echo 'Build successful.'
-    }
-    failure {
-      echo 'Build failed.'
-    }
   }
 }
 
