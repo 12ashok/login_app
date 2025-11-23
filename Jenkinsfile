@@ -43,12 +43,7 @@ pipeline {
       }
     }
   }
-  post {
-  always {
-    junit '**/target/surefire-reports/*.xml'
-    junit '**/target/failsafe-reports/*.xml'
-  }
-}
+ 
  post {
     success {
       echo 'Build successful.'
