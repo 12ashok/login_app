@@ -43,7 +43,15 @@ pipeline {
       }
     }
   }
- 
+ post {
+    always {
+      // Publish unit test reports (Surefire)
+      junit '**/target/surefire-reports/*.xml'
+
+      // Publish integration test reports (Failsafe), if you use them
+      junit '**/target/failsafe-reports/*.xml'
+    }
+  }
  post {
     success {
       echo 'Build successful.'
